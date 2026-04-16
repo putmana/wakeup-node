@@ -1,0 +1,15 @@
+services:
+  wakeup-node:
+    build: .
+    container_name: wakeup-node
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./sounds:/sounds:ro
+    environment:
+      ALARM_FILE: /sounds/ihs.flac
+      AUDIO_BACKEND: alsa
+      AUDIO_DEVICE: alsa/hw:3,0
+    devices:
+      - /dev/snd:/dev/snd
